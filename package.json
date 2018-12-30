@@ -14,8 +14,11 @@
     "bazel:lint-fix": "yarn bazel:format --lint=fix",
     "format": "git-clang-format",
     "precommit": "check-clang-format \"yarn format\"",
-    "graph:in": "bazel query 'deps(//src:prodapp)' --output graph > graph.in",
-    "graph:png": "bazel query ... --output graph | dot -Tpng > graph.png"
+    "graph:in": "bazel query ... --output graph > graph.in",
+    "graph:in:prodapp": "bazel query 'deps(//src:prodapp)' --output graph > graph.in",
+    "graph:png": "bazel query ... --output graph | dot -Tpng > graph.png",
+    "graph:dot": "dot -Tpng < graph.in > graph.png",
+    "graph:all": "yarn run graph:in && yarn run graph:dot"
   },
   "private": true,
   "engines": {
