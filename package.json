@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "scripts": {
     "build": "bazel build //src:bundle",
-    "serve": "ibazel run //src:devserver",
-    "serve-prod": "ibazel run //src:prodserver --verbose_failures",
+    "serve": "bazel run //src:devserver",
+    "watch:serve": "ibazel run //src:devserver",
+    "serve-prod": "bazel run //src:prodserver",
+    "watch:serve-prod": "ibazel run //src:prodserver",
     "e2e": "bazel test //e2e:all",
     "test": "bazel test //src/...",
     "benchmark": "ibazel-benchmark-runner //src:devserver src/hello-world/hello-world.component.ts --url=http://localhost:4200",
