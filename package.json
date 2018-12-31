@@ -4,8 +4,8 @@
   "scripts": {
     "build": "bazel build //src:bundle",
     "serve": "bazel run //src:devserver",
-    "watch:serve": "ibazel run //src:devserver",
     "serve-prod": "bazel run //src:prodserver",
+    "watch:serve": "ibazel run //src:devserver",
     "watch:serve-prod": "ibazel run //src:prodserver",
     "e2e": "bazel test //e2e:all",
     "test": "bazel test //src/...",
