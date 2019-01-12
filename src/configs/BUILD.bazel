@@ -1,0 +1,9 @@
+package(default_visibility = ["//visibility:public"])
+
+exports_files([
+    "module-id.js",
+    "require.config.js",
+    "tsconfig.app.json",
+    "tsconfig.spec.json",
+    "tslint.json"
+])

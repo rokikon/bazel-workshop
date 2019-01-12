@@ -21,8 +21,8 @@ ng_module(
     ],
     tsconfig = "//src:tsconfig-app",
     deps = [
-        "//src/feature/+state:reducers",
-        "//src/material",
+        "//src/features/feature/+state:reducers",
+        "//src/app/shared/material",
         "@angular//packages/core",
         "@angular//packages/platform-browser",
         "@angular//packages/platform-browser/animations",
