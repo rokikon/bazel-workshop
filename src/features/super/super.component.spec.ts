@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SuperComponent } from './super.component';
+import {SuperComponent} from './super.component';
 
 describe('SuperComponent', () => {
   let component: SuperComponent;
   let fixture: ComponentFixture<SuperComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({ declarations: [SuperComponent] }).compileComponents();
+    TestBed.configureTestingModule({declarations: [SuperComponent]}).compileComponents();
   }));
 
   beforeEach(() => {

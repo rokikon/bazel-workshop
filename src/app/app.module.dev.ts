@@ -5,7 +5,6 @@ import { SuperModuleNgFactory } from '../features/super/super.module.ngfactory';
 import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 
-
 export class MyLoader extends NgModuleFactoryLoader {
   load(id: string) {
     switch (id) {
