@@ -3,23 +3,23 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 
-import { featureReducer } from './+state/feature.reducers';
-import { FeatureComponent } from './feature.component';
+import { superReducer } from './+state/super.reducers';
+import { SuperComponent } from './super.component';
 
 @NgModule({
   declarations: [
-    FeatureComponent,
+    SuperComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
         path: '',
-        component: FeatureComponent,
+        component: SuperComponent,
       },
     ]),
-    StoreModule.forFeature('feature', featureReducer),
+    StoreModule.forFeature('super', superReducer),
   ],
 })
-export class FeatureModule {
+export class SuperModule {
 }

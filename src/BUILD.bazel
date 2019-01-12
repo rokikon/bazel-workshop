@@ -99,7 +99,7 @@ rollup_bundle(
     # In the future, we could automatically gather these from statically
     # analyzing the Angular sources.
     additional_entry_points = [
-        "src/features/feature/feature.module.ngfactory",
+        "src/features/super/super.module.ngfactory",
     ],
     entry_point = "src/main.prod",
     deps = [

@@ -23,7 +23,7 @@ ng_module(
     ],
     tsconfig = "//src/configs:tsconfig.app.json",
     deps = [
-        "//src/features/feature",
+        "//src/features/super",
         "//src/app/shared/material",
         "//src/app/shared/+state:reducers",
         "@angular//packages/core",

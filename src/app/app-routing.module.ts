@@ -3,8 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'feature',
-    loadChildren: '../features/feature/feature.module#FeatureModule',
+    path: 'super',
+    loadChildren: '../features/super/super.module#SuperModule',
   },
 ];
 

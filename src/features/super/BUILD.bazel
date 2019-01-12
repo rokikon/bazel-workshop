@@ -5,23 +5,23 @@ load("@build_bazel_rules_typescript//:defs.bzl", "ts_config")
 package(default_visibility = ["//visibility:public"])
 
 sass_binary(
-    name = "feature-styles",
-    src = "feature.component.scss",
+    name = "super-styles",
+    src = "super.component.scss",
 )
 
 ng_module(
-    name = "feature",
+    name = "super",
     srcs = [
-        "feature.component.ts",
-        "feature.module.ts",
+        "super.component.ts",
+        "super.module.ts",
     ],
     assets = [
-        ":feature.component.html",
-        ":feature-styles",
+        ":super.component.html",
+        ":super-styles",
     ],
     tsconfig = "//src:tsconfig-app",
     deps = [
-        "//src/features/feature/+state:reducers",
+        "//src/features/super/+state:reducers",
         "//src/app/shared/material",
         "@angular//packages/core",
         "@angular//packages/platform-browser",
