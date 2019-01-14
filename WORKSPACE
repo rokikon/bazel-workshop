@@ -65,17 +65,15 @@ http_archive(
 ####################################
 # Load and install our dependencies downloaded above.
 
-load("@angular//packages/bazel:package.bzl", "rules_angular_dependencies")
-
-rules_angular_dependencies()
+load("@build_bazel_rules_nodejs//:package.bzl", "rules_nodejs_dependencies")
+rules_nodejs_dependencies()
 
 load("@build_bazel_rules_typescript//:package.bzl", "rules_typescript_dependencies")
-
 rules_typescript_dependencies()
 
-load("@build_bazel_rules_nodejs//:package.bzl", "rules_nodejs_dependencies")
+load("@angular//packages/bazel:package.bzl", "rules_angular_dependencies")
+rules_angular_dependencies()
 
-rules_nodejs_dependencies()
 
 load("@build_bazel_rules_nodejs//:defs.bzl", "check_bazel_version", "node_repositories", "yarn_install")
 
@@ -96,10 +94,9 @@ yarn_install(
 )
 
 load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains", "go_rules_dependencies")
-
+go_register_toolchains()
 go_rules_dependencies()
 
-go_register_toolchains()
 
 load("@io_bazel_rules_webtesting//web:repositories.bzl", "browser_repositories", "web_test_repositories")
 
@@ -114,9 +111,6 @@ load("@build_bazel_rules_typescript//:defs.bzl", "ts_setup_workspace")
 
 ts_setup_workspace()
 
-load("@io_bazel_rules_sass//:defs.bzl", "sass_repositories")
-
-sass_repositories()
 
 load("@angular//:index.bzl", "ng_setup_workspace")
 
@@ -125,3 +119,7 @@ ng_setup_workspace()
 load("@angular_material//:index.bzl", "angular_material_setup_workspace")
 
 angular_material_setup_workspace()
+
+load("@io_bazel_rules_sass//:defs.bzl", "sass_repositories")
+
+sass_repositories()

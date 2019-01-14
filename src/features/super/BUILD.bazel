@@ -1,0 +1,32 @@
+load("@angular//:index.bzl", "ng_module")
+load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
+load("@build_bazel_rules_typescript//:defs.bzl", "ts_config")
+
+package(default_visibility = ["//visibility:public"])
+
+sass_binary(
+    name = "super-styles",
+    src = "super.component.scss",
+)
+
+ng_module(
+    name = "super",
+    srcs = [
+        "super.component.ts",
+        "super.module.ts",
+    ],
+    assets = [
+        ":super.component.html",
+        ":super-styles",
+    ],
+    tsconfig = "//src:tsconfig-app",
+    deps = [
+        "//src/features/super/+state:reducers",
+        "//src/app/shared/material",
+        "@angular//packages/core",
+        "@angular//packages/platform-browser",
+        "@angular//packages/platform-browser/animations",
+        "@angular//packages/router",
+        "@npm//@ngrx/store",
+    ],
+)

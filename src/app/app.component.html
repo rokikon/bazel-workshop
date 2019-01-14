@@ -1,0 +1,30 @@
+<nav>
+  <mat-toolbar>
+    <a class="mat-button"
+       href="https://bazel.build">
+      <img class="nav-logo"
+           src="/assets/images/bazel-navbar.svg">
+    </a>
+    <a class="mat-button hide-small"
+       routerLink="/">Home</a>
+    <a class="mat-button hide-small"
+       routerLink="/super">Super</a>
+    <span class="flex-spacer"></span>
+    <a class="mat-button"
+       href="https://github.com/alexeagle/angular-bazel-example">
+      <img class="nav-logo"
+           src="/assets/images/github-circle-white-transparent.svg">
+    </a>
+  </mat-toolbar>
+
+  <mat-toolbar class="show-small mobile-nav">
+    <a class="mat-button"
+       routerLink="/">Home</a>
+    <a class="mat-button"
+       routerLink="/super">Super</a>
+  </mat-toolbar>
+</nav>
+
+<div class="content">
+  <router-outlet></router-outlet>
+</div>
