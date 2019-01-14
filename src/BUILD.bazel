@@ -1,21 +1,20 @@
 load("@angular//:index.bzl", "ng_module")
 load("@build_bazel_rules_nodejs//:defs.bzl", "history_server", "rollup_bundle")
 load("@build_bazel_rules_nodejs//internal/web_package:web_package.bzl", "web_package")
-load("@build_bazel_rules_typescript//:defs.bzl", "ts_config", "ts_devserver", "ts_library")
-load("@io_bazel_rules_sass//:defs.bzl", "sass_binary")
 
 package(default_visibility = ["//visibility:public"])
 
+load("@build_bazel_rules_typescript//:defs.bzl", "ts_config", "ts_devserver")
 ts_config(
     name = "tsconfig-test",
-    src = "tsconfig.spec.json",
-    deps = ["//:tsconfig.json"],
+    src = "//src/configs:tsconfig.spec.json",
+    deps = [":tsconfig.json"],
 )
 
 ts_config(
     name = "tsconfig-app",
-    src = "tsconfig.app.json",
-    deps = ["//:tsconfig.json"],
+    src = "//src/configs:tsconfig.app.json",
+    deps = [":tsconfig.json"],
 )
 
 # We always strip these paths off the front of any assets we serve
@@ -24,11 +23,6 @@ _ROOT_DIRS = [
     "npm/node_modules/@angular/material/prebuilt-themes",
     "npm/node_modules/@ngrx/store/bundles",
 ]
-
-sass_binary(
-    name = "app-styles",
-    src = "app.component.scss",
-)
 
 ng_module(
     name = "src",
@@ -40,15 +34,11 @@ ng_module(
             "test.ts",
         ],
     ),
-    assets = [
-        ":app.component.html",
-        ":app-styles",
-    ],
+    assets = ["//src/assets/styles:main"],
     tsconfig = "//src:tsconfig-app",
     deps = [
-        "//src/+state:reducers",
-        "//src/feature",
-        "//src/material",
+        "//src/app",
+        "//src/app/shared/material",
         "@angular//packages/core",
         "@angular//packages/platform-browser",
         "@angular//packages/platform-browser/animations",
@@ -70,7 +60,7 @@ ts_devserver(
     # or because they aren't compatible with Require.js so we must use a runtime
     # loader to load them.
     data = [
-        "//src/images:image_assets",
+        "//src/assets/images:images",
         "@npm//node_modules/@ngrx/store:bundles/store.umd.min.js",
     ],
     # Start from the development version of the main
@@ -81,14 +71,14 @@ ts_devserver(
     # These scripts will be included in the JS bundle after require.js
     # They should have only named UMD modules, or require.js will throw.
     scripts = [
-        ":require.config.js",
-        ":module-id.js",
+        "//src/configs:require.config.js",
+        "//src/configs:module-id.js",
         "@npm//node_modules/tslib:tslib.js",
     ],
     # Serve these files in addition to the JavaScript bundle
     # The corresponding <script> or <link> tags will be injected into the index_html
     static_files = [
-        "//src/styles:main.css",
+        "//src/assets/styles:main.css",
         "@npm//node_modules/@angular/material:prebuilt-themes/deeppurple-amber.css",
         #  We load zone.js outside the bundle. That's because it's a "pollyfill"
         # which speculates that such features might be available in a browser.
@@ -98,9 +88,7 @@ ts_devserver(
         "@npm//node_modules/zone.js:dist/zone.min.js",
     ],
     # Tell Bazel to build the sources first
-    deps = [
-        "//src",
-    ],
+    deps = ["//src"],
 )
 
 rollup_bundle(
@@ -111,7 +99,7 @@ rollup_bundle(
     # In the future, we could automatically gather these from statically
     # analyzing the Angular sources.
     additional_entry_points = [
-        "src/feature/feature.module.ngfactory",
+        "src/features/super/super.module.ngfactory",
     ],
     entry_point = "src/main.prod",
     deps = [
@@ -129,12 +117,12 @@ web_package(
         "@npm//node_modules/zone.js:dist/zone.min.js",
         # We load system.js here as it is required in prodmode for code-splitting support.
         "@npm//node_modules/systemjs:dist/system.js",
-        "//src/styles:main",
+        "//src/assets/styles:main",
         ":bundle.min.js",
     ],
     data = [
         ":bundle",
-        "//src/images:image_assets",
+        "//src/assets/images:images",
     ],
     # <script> and <link> tags will be automatically injected into this index.
     index_html = "index.html",
